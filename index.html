@@ -17,14 +17,34 @@
     <script>
 var map = null
 
+
+function onEachFeature(feature, layer) {
+    var popupContent = "<p>Název ulice: ";
+
+    if (feature.properties && feature.properties["Nazev"]) {
+        popupContent += feature.properties["Nazev"];
+    }
+    popupContent += "</p>Kod: ";
+ 
+    if (feature.properties && feature.properties["Kod"]) {
+        popupContent += feature.properties["Kod"];
+    }   
+    popupContent += "</p>";
+
+    layer.bindPopup(popupContent);
+}
+
 function onVectorDataReady(data) {
     L.geoJson(data, {
         style: {
             color: "#ff5500 ",
-            weight: 2,
+            weight: 4,
             opacity: 1,
             fill: false
-        }
+        },
+
+        onEachFeature: onEachFeature
+
    }).addTo(map);
 }
 
