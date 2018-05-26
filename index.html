@@ -15,17 +15,22 @@
    crossorigin=""></script>
 
     <script>
-var map = L.map('map').setView([50.08, 14.415], 13);
+var map = null
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+function mapDivLoaded() {
+    map = L.map('map').setView([50.08, 14.415], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+}
+
     </script>
 
 </head>
 <body style="width:100%;height:100%">
 	<div id="loading">Loading data...</div>
-    <div id="map" style="width:100%;height:100%;position:absolute;left:0px;top:0px"></div>
+    <div id="map" style="width:100%;height:100%;position:absolute;left:0px;top:0px" onload="mapDivLoaded();"></div>
 
 </body>
 </html>
