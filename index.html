@@ -98,18 +98,16 @@ function mapDivLoaded() {
             polyline: false,
             rectangle: false,
             marker: false,
-            circlemarker: false
+            circlemarker: false,
+            polygon: {
+                allowIntersection: false,
+                showArea: true
+            }
         },
         edit: {
             featureGroup: drawnItems,
             poly: {
                 allowIntersection: false
-            }
-        },
-        draw: {
-            polygon: {
-                allowIntersection: false,
-                showArea: true
             }
         }
     }));
