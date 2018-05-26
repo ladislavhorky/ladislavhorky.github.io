@@ -65,7 +65,8 @@ function onVectorDataReady(data) {
 }
 
 function updateGeometry() {
-    console.log(JSON.stringify(drawnItems.toGeoJSON()));
+    var geojsonToBeSentToBE = JSON.stringify(drawnItems.toGeoJSON());
+    console.log(geojsonToBeSentToBE);
 }
 
 function mapDivLoaded() {
@@ -92,6 +93,13 @@ function mapDivLoaded() {
     drawnItems = L.featureGroup().addTo(map);
 
     map.addControl(new L.Control.Draw({
+        draw: {
+            circle : false,
+            polyline: false,
+            rectangle: false,
+            marker: false,
+            circlemarker: false
+        },
         edit: {
             featureGroup: drawnItems,
             poly: {
@@ -107,11 +115,10 @@ function mapDivLoaded() {
     }));
 
     map.on(L.Draw.Event.CREATED, function (event) {
-        var layer = event.layer;
-
-        drawnItems.addLayer(layer);
+        drawnItems.addLayer(event.layer);
         updateGeometry();
     });
+
     map.on(L.Draw.Event.EDITED, updateGeometry);
     map.on(L.Draw.Event.DELETED, updateGeometry);
 }
