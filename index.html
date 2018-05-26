@@ -106,6 +106,8 @@ function mapDivLoaded() {
         var layer = event.layer;
 
         drawnItems.addLayer(layer);
+        console.log('draw:created->');
+        console.log(JSON.stringify(layer.toGeoJSON()));
     });
 }
 
