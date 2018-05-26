@@ -15,19 +15,19 @@
    crossorigin=""></script>
 
     <script>
-var map = null
-
+var map = null;
+var trzniMista = null;
 
 function onEachFeature(feature, layer) {
-    var popupContent = "<p>Název ulice: ";
+    var popupContent = "<p>Adresa: ";
 
-    if (feature.properties && feature.properties["Nazev"]) {
-        popupContent += feature.properties["Nazev"];
+    if (feature.properties && feature.properties["alternativeIdentifier"]) {
+        popupContent += feature.properties["alternativeIdentifier"];
     }
     popupContent += "</p>Kod: ";
  
-    if (feature.properties && feature.properties["Kod"]) {
-        popupContent += feature.properties["Kod"];
+    if (feature.properties && feature.properties["gml_id"]) {
+        popupContent += feature.properties["gml_id"];
     }   
     popupContent += "</p>";
 
@@ -68,10 +68,11 @@ function mapDivLoaded() {
     //get the vector data
     var x = new XMLHttpRequest();
     x.overrideMimeType("application/json");
-    x.open("GET", './ulice.geojson', true);
+    x.open("GET", './adresy.geojson', true);
     x.onreadystatechange = function () {
         if ((x.readyState) == 4 && ((x.status == 200) || (x.status == 0)))
         {
+            trzniMista = JSON.parse(x.responseText);
             onVectorDataReady(JSON.parse(x.responseText));
         }
     };
